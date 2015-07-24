@@ -84,15 +84,15 @@ private:
   NTuple::Item<long>  m_rec;
   NTuple::Item<long>  m_evttag; 
   NTuple::Item<long>   m_idxmc;
-  NTuple::Array<long>  m_pdgid;
-  NTuple::Array<long>  m_motheridx;
+  NTuple::Array<int>  m_pdgid;
+  NTuple::Array<int>  m_motheridx;
 
   NTuple::Item<long>    m_ntof1;
-  NTuple::Array<long>   m_toflayer1;
+  NTuple::Array<int>   m_toflayer1;
   NTuple::Array<double> m_tof1;
   NTuple::Array<double> m_t01;
   NTuple::Item<long>    m_ntof2;
-  NTuple::Array<long>   m_toflayer2;
+  NTuple::Array<int>   m_toflayer2;
   NTuple::Array<double> m_tof2;
   NTuple::Array<double> m_t02;
   NTuple::Item<long>   m_mustatus;

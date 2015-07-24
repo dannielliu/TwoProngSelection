@@ -121,54 +121,54 @@ StatusCode TwoProng::initialize(){
 	//     log << MSG::ERROR << " Could not initialize Decay code service" << endreq;
 	//     return EventTagSvcStatus;
 	//   }
-	NTuplePtr nt0(ntupleSvc(), "GETAPETAP/mctruth");
-	if ( nt0 ) m_tuple0 = nt0;
-	else {
-		m_tuple0 = ntupleSvc()->book ("GETAPETAP/mctruth", CLID_ColumnWiseTuple, "ks N-Tuple example");
-		if ( m_tuple0 )    {
-			status = m_tuple0->addItem ("truthppip", 4,  m_truthppip);
-			status = m_tuple0->addItem ("truthppim", 4,  m_truthppim);
-			status = m_tuple0->addItem ("mcgpx", 3,  m_mcgpx);
-			status = m_tuple0->addItem ("mcgpy" , 3,  m_mcgpy);
-			status = m_tuple0->addItem ("mcgpz" , 3,  m_mcgpz);
-			status = m_tuple0->addItem ("mcge" , 3,  m_mcge);
-			status = m_tuple0->addItem ("dang_min", m_dang_min);
-			status = m_tuple0->addItem ("dang_e", m_dang_e);
-		}
-		else    {
-			log << MSG::ERROR << "    Cannot book N-tuple:" << long(m_tuple0) << endmsg;
-			return StatusCode::FAILURE;
-		}
-	}        
+////////NTuplePtr nt0(ntupleSvc(), "GETAPETAP/mctruth");
+////////if ( nt0 ) m_tuple0 = nt0;
+////////else {
+////////	m_tuple0 = ntupleSvc()->book ("GETAPETAP/mctruth", CLID_ColumnWiseTuple, "ks N-Tuple example");
+////////	if ( m_tuple0 )    {
+////////		status = m_tuple0->addItem ("truthppip", 4,  m_truthppip);
+////////		status = m_tuple0->addItem ("truthppim", 4,  m_truthppim);
+////////		status = m_tuple0->addItem ("mcgpx", 3,  m_mcgpx);
+////////		status = m_tuple0->addItem ("mcgpy" , 3,  m_mcgpy);
+////////		status = m_tuple0->addItem ("mcgpz" , 3,  m_mcgpz);
+////////		status = m_tuple0->addItem ("mcge" , 3,  m_mcge);
+////////		status = m_tuple0->addItem ("dang_min", m_dang_min);
+////////		status = m_tuple0->addItem ("dang_e", m_dang_e);
+////////	}
+////////	else    {
+////////		log << MSG::ERROR << "    Cannot book N-tuple:" << long(m_tuple0) << endmsg;
+////////		return StatusCode::FAILURE;
+////////	}
+////////}        
 
 
 
 
 
-	NTuplePtr nt1(ntupleSvc(), "GETAPETAP/vxyz");
-	if ( nt1 ) m_tuple1 = nt1;
-	else {
-		m_tuple1 = ntupleSvc()->book ("GETAPETAP/vxyz", CLID_ColumnWiseTuple, "kk N-Tuple example");
-		if ( m_tuple1 )    {
-			status = m_tuple1->addItem ("vx0",   m_vx0);
-			status = m_tuple1->addItem ("vy0",   m_vy0);
-			status = m_tuple1->addItem ("vz0",   m_vz0);
-			status = m_tuple1->addItem ("vr0",   m_vr0);
-			status = m_tuple1->addItem ("rvxy0",  m_rvxy0);
-			status = m_tuple1->addItem ("rvz0",   m_rvz0);
-			status = m_tuple1->addItem ("rvphi0", m_rvphi0);
-			//status = m_tuple1->addItem ("costheta",m_costheta);
-			status = m_tuple1->addItem ("phi", m_phi_mdc);
-			status = m_tuple1->addItem ("p", m_pt);
-			status = m_tuple1->addItem ("rvx0", m_rvx0);
-			status = m_tuple1->addItem ("rvy0", m_rvy0);
-			status = m_tuple1->addItem ("phi0", m_phi0);
-		} 
-		else    { 
-			log << MSG::ERROR << "    Cannot book N-tuple:" << long(m_tuple1) << endmsg;
-			return StatusCode::FAILURE;
-		}
-	}
+////////NTuplePtr nt1(ntupleSvc(), "GETAPETAP/vxyz");
+////////if ( nt1 ) m_tuple1 = nt1;
+////////else {
+////////	m_tuple1 = ntupleSvc()->book ("GETAPETAP/vxyz", CLID_ColumnWiseTuple, "kk N-Tuple example");
+////////	if ( m_tuple1 )    {
+////////		status = m_tuple1->addItem ("vx0",   m_vx0);
+////////		status = m_tuple1->addItem ("vy0",   m_vy0);
+////////		status = m_tuple1->addItem ("vz0",   m_vz0);
+////////		status = m_tuple1->addItem ("vr0",   m_vr0);
+////////		status = m_tuple1->addItem ("rvxy0",  m_rvxy0);
+////////		status = m_tuple1->addItem ("rvz0",   m_rvz0);
+////////		status = m_tuple1->addItem ("rvphi0", m_rvphi0);
+////////		//status = m_tuple1->addItem ("costheta",m_costheta);
+////////		status = m_tuple1->addItem ("phi", m_phi_mdc);
+////////		status = m_tuple1->addItem ("p", m_pt);
+////////		status = m_tuple1->addItem ("rvx0", m_rvx0);
+////////		status = m_tuple1->addItem ("rvy0", m_rvy0);
+////////		status = m_tuple1->addItem ("phi0", m_phi0);
+////////	} 
+////////	else    { 
+////////		log << MSG::ERROR << "    Cannot book N-tuple:" << long(m_tuple1) << endmsg;
+////////		return StatusCode::FAILURE;
+////////	}
+////////}
 
 
 
@@ -182,8 +182,8 @@ StatusCode TwoProng::initialize(){
 			status = m_tuple4->addItem ("evttag",  m_evttag); 
 			status = m_tuple4->addItem("indexmc",          m_idxmc, 0, 100);
 			status = m_tuple4->addIndexedItem("pdgid",     m_idxmc, m_pdgid);
-			status = m_tuple4->addIndexedItem("motheridx", m_idxmc, m_motheridx);    
-                        status = m_tuple4->addItem ("ngch" ,   m_ngch);
+			status = m_tuple4->addIndexedItem("motheridx", m_idxmc, m_motheridx);
+			status = m_tuple4->addItem ("ngch" ,   m_ngch);
 			status = m_tuple4->addItem ("ncharg",   m_ncharg);
 			status = m_tuple4->addItem ("nneu",    m_nneu);
 
@@ -266,6 +266,7 @@ StatusCode TwoProng::execute() {
 	if (eventHeader->runNumber()<0)
 	{
 		//MC information
+		//
 		Vp4 mcpGam,mcpGam1,mcpGam2, mcppip,mcppim;
 
 		mcpGam.clear();
@@ -281,6 +282,10 @@ StatusCode TwoProng::execute() {
 		SmartDataPtr<Event::McParticleCol> mcParticleCol(eventSvc(), "/Event/MC/McParticleCol");
 
 		int m_numParticle = 0;
+		Vint mcidxi;
+		std::vector<long> mcidx, pdgid;
+		mcidx.clear();
+		pdgid.clear();
 		if (!mcParticleCol)
 		{
 			std::cout << "Could not retrieve McParticelCol" << std::endl;
@@ -288,7 +293,7 @@ StatusCode TwoProng::execute() {
 		}
 
 		bool psipDecay = false;
-		int rootIndex = -1;
+		//int rootIndex = -1;
 
 		Event::McParticleCol::iterator iter_mc = mcParticleCol->begin();
 		for (; iter_mc != mcParticleCol->end(); iter_mc++)
@@ -297,116 +302,126 @@ StatusCode TwoProng::execute() {
 			HepLorentzVector mctrack_iniposition = (*iter_mc)->initialPosition();
 			HepLorentzVector mctrack_finposition = (*iter_mc)->finalPosition();
 
-			if ((*iter_mc)->primaryParticle()) continue;
-			if (!(*iter_mc)->decayFromGenerator()) continue;
-			//if ( ((*iter_mc)->mother()).trackIndex()<3 ) continue;
-			int imom=443;
-			if(m_ecms<3.2)imom=443;
-			else if (m_ecms>3.6)imom=100443;
-			if ((*iter_mc)->particleProperty()==imom)  
-				//if ((*iter_mc)->particleProperty()==100443) 
-			{
-				psipDecay = true;
-				rootIndex = (*iter_mc)->trackIndex();
-				//    m_evttag=(m_EventTagSvc->getChainCode(*iter_mc))<<8;
+	////////	if ((*iter_mc)->primaryParticle()) continue;
+	////////	if (!(*iter_mc)->decayFromGenerator()) continue;
+	////////	//if ( ((*iter_mc)->mother()).trackIndex()<3 ) continue;
+	////////	int imom=443;
+	////////	if(m_ecms<3.2)imom=443;
+	////////	else if (m_ecms>3.6)imom=100443;
+	////////	if ((*iter_mc)->particleProperty()==imom)  
+	////////		//if ((*iter_mc)->particleProperty()==100443) 
+	////////	{
+	////////		psipDecay = true;
+	////////		rootIndex = (*iter_mc)->trackIndex();
+	////////		//    m_evttag=(m_EventTagSvc->getChainCode(*iter_mc))<<8;
 
-			}
-			if (!psipDecay) continue;
-			int mcidxi=(*iter_mc)->trackIndex() - rootIndex;	
-			int mcidx = ((*iter_mc)->mother()).trackIndex() - rootIndex;
-			int pdgid = (*iter_mc)->particleProperty();
-			m_pdgid[m_numParticle] = pdgid;
-			m_motheridx[m_numParticle] = mcidx;
-			m_numParticle += 1; 
-			if(m_mcmatch){
-				if( (*iter_mc)->particleProperty() == 321){
-					mcppip.push_back(mctrue_track);
-					m_truthppip[0] = mctrue_track.px();
-					m_truthppip[1] = mctrue_track.py();
-					m_truthppip[2] = mctrue_track.pz();
-					m_truthppip[3] = mctrue_track.e();
-				}
+	////////	}
+	////////	if (!psipDecay) continue;
+			mcidxi.push_back((*iter_mc)->trackIndex());
+			mcidx.push_back(((*iter_mc)->mother()).trackIndex());
+			pdgid.push_back((*iter_mc)->particleProperty());
+		////////long mcidxi=(*iter_mc)->trackIndex() - rootIndex;	
+		////////long mcidx = ((*iter_mc)->mother()).trackIndex() - rootIndex;
+		////////long pdgid = (*iter_mc)->particleProperty();
+		////////m_motheridx[m_numParticle] = (long)mcidx;
+		////////m_pdgid[m_numParticle] = (long)pdgid;
+		////////m_numParticle += 1; 
+	////////	if(m_mcmatch){
+	////////		if( (*iter_mc)->particleProperty() == 321){
+	////////			mcppip.push_back(mctrue_track);
+	////////			m_truthppip[0] = mctrue_track.px();
+	////////			m_truthppip[1] = mctrue_track.py();
+	////////			m_truthppip[2] = mctrue_track.pz();
+	////////			m_truthppip[3] = mctrue_track.e();
+	////////		}
 
-				if( (*iter_mc)->particleProperty() == -321){
-					mcppim.push_back(mctrue_track);
-					m_truthppim[0] = mctrue_track.px();
-					m_truthppim[1] = mctrue_track.py();
-					m_truthppim[2] = mctrue_track.pz();
-					m_truthppim[3] = mctrue_track.e();
-				}
+	////////		if( (*iter_mc)->particleProperty() == -321){
+	////////			mcppim.push_back(mctrue_track);
+	////////			m_truthppim[0] = mctrue_track.px();
+	////////			m_truthppim[1] = mctrue_track.py();
+	////////			m_truthppim[2] = mctrue_track.pz();
+	////////			m_truthppim[3] = mctrue_track.e();
+	////////		}
 
-				if( (*iter_mc)->particleProperty() == 22 &&
-						((*iter_mc)->mother()).particleProperty()==100443){//443 for J/psi;100443 for psi(2S)
-							m_mcgpx[2]  = mctrue_track.px();
-							m_mcgpy[2]  = mctrue_track.py();
-							m_mcgpz[2]  = mctrue_track.pz();
-							m_mcge[2]  = mctrue_track.e();
-							vgammamc_ext=(*iter_mc)->finalPosition().vect();
-							vgammamc_ext[0] = mctrue_track.px();
-							vgammamc_ext[1] = mctrue_track.py();
-							vgammamc_ext[2] = mctrue_track.pz();
-						}
-				if( (*iter_mc)->particleProperty() == 22 &&
-						((*iter_mc)->mother()).particleProperty()==111){//111 for pi0; 221 for eta
+	////////		if( (*iter_mc)->particleProperty() == 22 &&
+	////////				((*iter_mc)->mother()).particleProperty()==100443){//443 for J/psi;100443 for psi(2S)
+	////////					m_mcgpx[2]  = mctrue_track.px();
+	////////					m_mcgpy[2]  = mctrue_track.py();
+	////////					m_mcgpz[2]  = mctrue_track.pz();
+	////////					m_mcge[2]  = mctrue_track.e();
+	////////					vgammamc_ext=(*iter_mc)->finalPosition().vect();
+	////////					vgammamc_ext[0] = mctrue_track.px();
+	////////					vgammamc_ext[1] = mctrue_track.py();
+	////////					vgammamc_ext[2] = mctrue_track.pz();
+	////////				}
+	////////		if( (*iter_mc)->particleProperty() == 22 &&
+	////////				((*iter_mc)->mother()).particleProperty()==111){//111 for pi0; 221 for eta
 
-					mcIGam.push_back(mcidx);
-					mcpGam.push_back(mctrue_track);
-					vmcGam.push_back((*iter_mc)->finalPosition().vect());
-					//					cout<<"(*iter_mc)->finalPosition().vect() ="<<(*iter_mc)->finalPosition().vect()<<endl;
-				}
-				if( (*iter_mc)->particleProperty() == 111 &&
-						((((*iter_mc)->mother()).particleProperty()==10441)
-						 ||(((*iter_mc)->mother()).particleProperty()==20443)||(((*iter_mc)->mother()).particleProperty()==445))
-				  ){
-					mcIEta.push_back(mcidxi);
-				}
-			} 
+	////////			mcIGam.push_back(mcidx);
+	////////			mcpGam.push_back(mctrue_track);
+	////////			vmcGam.push_back((*iter_mc)->finalPosition().vect());
+	////////			//					cout<<"(*iter_mc)->finalPosition().vect() ="<<(*iter_mc)->finalPosition().vect()<<endl;
+	////////		}
+	////////		if( (*iter_mc)->particleProperty() == 111 &&
+	////////				((((*iter_mc)->mother()).particleProperty()==10441)
+	////////				 ||(((*iter_mc)->mother()).particleProperty()==20443)||(((*iter_mc)->mother()).particleProperty()==445))
+	////////		  ){
+	////////			mcIEta.push_back(mcidxi);
+	////////		}
+	////////	} 
 		}
 		//cout<<"mcIGam.size() ="<<mcIGam.size()<<endl;
 		//cout<<"mcIEta.size() ="<<mcIEta.size()<<endl;
 
-
+		m_numParticle = mcidx.size();
 		m_idxmc = m_numParticle;
-
-		if(m_mcmatch&&mcIGam.size()==2&&mcIEta.size()==1){
-
-			mcpGam1.push_back(mcpGam[0]);
-			mcpGam2.push_back(mcpGam[1]);
-			if(mcpGam1.size()==1&&mcpGam2.size()==1){
-
-				//   std::cout<<":::"<<mcIEta.size()<<", "<<mcIGam.size()<<", "<<mcpGam1.size()<<", "<<mcpGam2.size()<<std::endl;
-				double mce1=mcpGam1[0].e();
-				double mce2=mcpGam2[0].e();
-				int mcee=(mce1>=mce2)?1:2;
-
-				if (mcee==1){
-
-					m_mcgpx[0]  = mcpGam1[0].px();
-					m_mcgpy[0]  = mcpGam1[0].py();
-					m_mcgpz[0]  = mcpGam1[0].pz();
-					m_mcge[0]  = mcpGam1[0].e();
-					vpi0_gammamc_high_ext = vmcGam[0];      
-					vpi0_gammamc_low_ext = vmcGam[1];
-					m_mcgpx[1]  = mcpGam2[0].px();
-					m_mcgpy[1]  = mcpGam2[0].py();
-					m_mcgpz[1]  = mcpGam2[0].pz();
-					m_mcge[1]  = mcpGam2[0].e();
-				}
-				else{
-					m_mcgpx[0]  = mcpGam2[0].px();
-					m_mcgpy[0]  = mcpGam2[0].py();
-					m_mcgpz[0]  = mcpGam2[0].pz();
-					m_mcge[0]  = mcpGam2[0].e();
-					vpi0_gammamc_high_ext = vmcGam[1];
-					vpi0_gammamc_low_ext = vmcGam[0];
-					m_mcgpx[1]  = mcpGam1[0].px();
-					m_mcgpy[1]  = mcpGam1[0].py();
-					m_mcgpz[1]  = mcpGam1[0].pz();
-					m_mcge[1]  = mcpGam1[0].e();
-				}
-			}
-
+		for (int i=0;i<mcidx.size();i++){
+			m_motheridx[i] = (short)mcidx[i];
+			m_pdgid[i] = (short)pdgid[i];
+			//m_numParticle += 1; 
 		}
+
+
+
+	////////if(m_mcmatch&&mcIGam.size()==2&&mcIEta.size()==1){
+
+	////////	mcpGam1.push_back(mcpGam[0]);
+	////////	mcpGam2.push_back(mcpGam[1]);
+	////////	if(mcpGam1.size()==1&&mcpGam2.size()==1){
+
+	////////		//   std::cout<<":::"<<mcIEta.size()<<", "<<mcIGam.size()<<", "<<mcpGam1.size()<<", "<<mcpGam2.size()<<std::endl;
+	////////		double mce1=mcpGam1[0].e();
+	////////		double mce2=mcpGam2[0].e();
+	////////		int mcee=(mce1>=mce2)?1:2;
+
+	////////		if (mcee==1){
+
+	////////			m_mcgpx[0]  = mcpGam1[0].px();
+	////////			m_mcgpy[0]  = mcpGam1[0].py();
+	////////			m_mcgpz[0]  = mcpGam1[0].pz();
+	////////			m_mcge[0]  = mcpGam1[0].e();
+	////////			vpi0_gammamc_high_ext = vmcGam[0];      
+	////////			vpi0_gammamc_low_ext = vmcGam[1];
+	////////			m_mcgpx[1]  = mcpGam2[0].px();
+	////////			m_mcgpy[1]  = mcpGam2[0].py();
+	////////			m_mcgpz[1]  = mcpGam2[0].pz();
+	////////			m_mcge[1]  = mcpGam2[0].e();
+	////////		}
+	////////		else{
+	////////			m_mcgpx[0]  = mcpGam2[0].px();
+	////////			m_mcgpy[0]  = mcpGam2[0].py();
+	////////			m_mcgpz[0]  = mcpGam2[0].pz();
+	////////			m_mcge[0]  = mcpGam2[0].e();
+	////////			vpi0_gammamc_high_ext = vmcGam[1];
+	////////			vpi0_gammamc_low_ext = vmcGam[0];
+	////////			m_mcgpx[1]  = mcpGam1[0].px();
+	////////			m_mcgpy[1]  = mcpGam1[0].py();
+	////////			m_mcgpz[1]  = mcpGam1[0].pz();
+	////////			m_mcge[1]  = mcpGam1[0].e();
+	////////		}
+	////////	}
+
+	////////}
 
 		//		m_tuple0->write();               
 	}
@@ -497,10 +512,10 @@ StatusCode TwoProng::execute() {
 		double yv=vx.y();
 		double zv=vx.z();
 		double Rxy=(x0-xv)*cos(phi0)+(y0-yv)*sin(phi0);
-		double m_vx0 = x0;
-		double m_vy0 = y0;
-		double m_vz0 = z0;
-		double m_vr0 = Rxy;
+////////	double m_vx0 = x0;
+////////	double m_vy0 = y0;
+////////	double m_vz0 = z0;
+////////	double m_vr0 = Rxy;
 		HepVector a = mdcTrk->helix();
 		HepSymMatrix Ea = mdcTrk->err();
 		HepPoint3D point0(0.,0.,0.);   // the initial point for MDC recosntruction
@@ -511,15 +526,15 @@ StatusCode TwoProng::execute() {
 		double  Rvxy0=fabs(vecipa[0]);  //the nearest distance to IP in xy plane
 		double  Rvz0=vecipa[3];         //the nearest distance to IP in z direction
 		double  Rvphi0=vecipa[1];
-		m_rvxy0=Rvxy0;
-		m_rvz0=Rvz0;
+////////	m_rvxy0=Rvxy0;
+////////	m_rvz0=Rvz0;
 		//		m_rvphi0=Rvphi0;
 		//m_costheta = costheta;
 		//		m_phi_mdc = phi_mdc;
-		m_pt = pch;
-		m_rvx0 = Rvxy0 * cos(Rvphi0);
-		m_rvy0 = Rvxy0 * sin(Rvphi0);
-		m_phi0 = Rvphi0;	
+////////	m_pt = pch;
+////////	m_rvx0 = Rvxy0 * cos(Rvphi0);
+////////	m_rvy0 = Rvxy0 * sin(Rvphi0);
+////////	m_phi0 = Rvphi0;	
 		//		m_tuple1->write();
 		if(fabs(Rvz0) >= m_vz0cut) continue;
 		if(fabs(Rvxy0) >= m_vr0cut) continue;
@@ -640,6 +655,11 @@ StatusCode TwoProng::execute() {
 
 	m_costheta = p4_kam.vect().cosTheta(p4_kap.vect());
 
+////////std::cout<<"New event-----------"<<std::endl;
+////////for (int i=0;i<m_idxmc;i++)
+////////{
+////////	std::cout<<"\ti: "<<i<<"\tidx: "<< m_motheridx[i]<<"\tpdgid: "<<m_pdgid[i]<<std::endl;
+////////}
 	m_tuple4->write();
 
 	return StatusCode::SUCCESS;
