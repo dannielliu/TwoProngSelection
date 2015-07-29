@@ -183,6 +183,7 @@ StatusCode TwoProng::initialize(){
 			status = m_tuple4->addItem("indexmc",          m_idxmc, 0, 100);
 			status = m_tuple4->addIndexedItem("pdgid",     m_idxmc, m_pdgid);
 			status = m_tuple4->addIndexedItem("motheridx", m_idxmc, m_motheridx);
+			status = m_tuple4->addItem ("ISRtag",          m_ISRtag);
 			status = m_tuple4->addItem ("ngch" ,   m_ngch);
 			status = m_tuple4->addItem ("ncharg",   m_ncharg);
 			status = m_tuple4->addItem ("nneu",    m_nneu);
@@ -294,6 +295,7 @@ StatusCode TwoProng::execute() {
 
 		bool psipDecay = false;
 		//int rootIndex = -1;
+		int isrtag=0;
 
 		Event::McParticleCol::iterator iter_mc = mcParticleCol->begin();
 		for (; iter_mc != mcParticleCol->end(); iter_mc++)
@@ -320,6 +322,7 @@ StatusCode TwoProng::execute() {
 			mcidxi.push_back((*iter_mc)->trackIndex());
 			mcidx.push_back(((*iter_mc)->mother()).trackIndex());
 			pdgid.push_back((*iter_mc)->particleProperty());
+			if ((*iter_mc)->trackIndex()==((*iter_mc)->mother()).trackIndex() && (*iter_mc)->particleProperty()==-22) isrtag = 1;
 		////////long mcidxi=(*iter_mc)->trackIndex() - rootIndex;	
 		////////long mcidx = ((*iter_mc)->mother()).trackIndex() - rootIndex;
 		////////long pdgid = (*iter_mc)->particleProperty();
@@ -380,6 +383,10 @@ StatusCode TwoProng::execute() {
 			m_pdgid[i] = (short)pdgid[i];
 			//m_numParticle += 1; 
 		}
+
+		m_ISRtag = isrtag;
+		if (isrtag==0) counter[3] ++;
+		else counter[4] ++;
 
 
 
@@ -672,6 +679,8 @@ StatusCode TwoProng::execute() {
 		cout<<"total number:         "<<counter[0]<<endl;
 		cout<<"good track:           "<<counter[1]<<endl;
 		cout<<"2 track:              "<<counter[2]<<endl;
+		cout<<"no isr:               "<<counter[3]<<endl;
+		cout<<"isr:                  "<<counter[4]<<endl;
 		MsgStream log(msgSvc(), name());
 		log << MSG::INFO << "in finalize()" << endmsg;
 		return StatusCode::SUCCESS;

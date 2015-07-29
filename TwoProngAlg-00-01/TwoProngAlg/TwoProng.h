@@ -86,6 +86,7 @@ private:
   NTuple::Item<long>   m_idxmc;
   NTuple::Array<int>  m_pdgid;
   NTuple::Array<int>  m_motheridx;
+  NTuple::Item<int>   m_ISRtag;
 
   NTuple::Item<long>    m_ntof1;
   NTuple::Array<int>   m_toflayer1;
