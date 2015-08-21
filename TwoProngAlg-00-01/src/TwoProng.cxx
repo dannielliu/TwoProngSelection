@@ -203,6 +203,9 @@ StatusCode TwoProng::initialize(){
 			status = m_tuple4->addItem ("epratio1", m_epratio1);
 			status = m_tuple4->addItem ("epratio2", m_epratio2);
 
+			status = m_tuple4->addItem("pid1", 5, m_pid1);
+			status = m_tuple4->addItem("pid2", 5, m_pid2);
+
 			status = m_tuple4->addItem ("kappx" , m_kappx);
 			status = m_tuple4->addItem ("kappy" , m_kappy);
 			status = m_tuple4->addItem ("kappz" , m_kappz);
@@ -322,7 +325,7 @@ StatusCode TwoProng::execute() {
 			mcidxi.push_back((*iter_mc)->trackIndex());
 			mcidx.push_back(((*iter_mc)->mother()).trackIndex());
 			pdgid.push_back((*iter_mc)->particleProperty());
-			if ((*iter_mc)->trackIndex()==((*iter_mc)->mother()).trackIndex() && (*iter_mc)->particleProperty()==-22) isrtag = 1;
+			if ((*iter_mc)->trackIndex()==((*iter_mc)->mother()).trackIndex() && (*iter_mc)->particleProperty()==22) isrtag = 1;
 		////////long mcidxi=(*iter_mc)->trackIndex() - rootIndex;	
 		////////long mcidx = ((*iter_mc)->mother()).trackIndex() - rootIndex;
 		////////long pdgid = (*iter_mc)->particleProperty();
@@ -642,6 +645,36 @@ StatusCode TwoProng::execute() {
 	if(nkam != 1) return sc;
 
 	counter[2]++;
+
+	ParticleID *pid = ParticleID::instance();
+	for (int i=0; i<nGood; i++){
+		EvtRecTrackIterator itTrk = evtRecTrkCol->begin() + iGood[i];
+		pid->init();
+		pid->setMethod(pid->methodProbability());
+		pid->setChiMinCut(4);
+		pid->setRecTrack(*itTrk);
+		pid->usePidSys(pid->useDedx() | pid->useTof() | pid->useEmc());
+		pid->identify(pid->all() | pid->onlyMuon());
+		pid->calculate();
+		if (i==0){
+			if (!pid->IsPidInfoValid()){  m_pid1[0]=0; m_pid1[1]=0; m_pid1[2]=0; m_pid1[3]=0; m_pid1[4]=0; continue;}
+			m_pid1[0] = pid->probElectron();
+			m_pid1[1] = pid->probMuon();
+			m_pid1[2] = pid->probPion();
+			m_pid1[3] = pid->probKaon();
+			m_pid1[4] = pid->probProton();
+		}
+		if (i==1){
+			if (!pid->IsPidInfoValid()){  m_pid2[0]=0; m_pid2[1]=0; m_pid2[2]=0; m_pid2[3]=0; m_pid2[4]=0; continue;}
+			m_pid2[0] = pid->probElectron();
+			m_pid2[1] = pid->probMuon();
+			m_pid2[2] = pid->probPion();
+			m_pid2[3] = pid->probKaon();
+			m_pid2[4] = pid->probProton();
+		}
+
+
+	}
 
 
 	RecMdcKalTrack *kamTrk = (*(evtRecTrkCol->begin()+ikam[0]))->mdcKalTrack();

@@ -103,6 +103,9 @@ private:
   NTuple::Item<double>   m_epratio1;
   NTuple::Item<double>   m_epratio2;
 
+  NTuple::Array<double> m_pid1;
+  NTuple::Array<double> m_pid2;
+  
   NTuple::Item<double> m_kappx;
   NTuple::Item<double> m_kappy; 
   NTuple::Item<double> m_kappz;
