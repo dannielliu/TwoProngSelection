@@ -184,9 +184,20 @@ StatusCode TwoProng::initialize(){
 			status = m_tuple4->addIndexedItem("pdgid",     m_idxmc, m_pdgid);
 			status = m_tuple4->addIndexedItem("motheridx", m_idxmc, m_motheridx);
 			status = m_tuple4->addItem ("ISRtag",          m_ISRtag);
+			status = m_tuple4->addItem ("KKtag",          m_KKtag);
 			status = m_tuple4->addItem ("ngch" ,   m_ngch);
 			status = m_tuple4->addItem ("ncharg",   m_ncharg);
 			status = m_tuple4->addItem ("nneu",    m_nneu);
+			
+			status = m_tuple4->addItem ("mc_kappx" , m_kappxmc);
+			status = m_tuple4->addItem ("mc_kappy" , m_kappymc);
+			status = m_tuple4->addItem ("mc_kappz" , m_kappzmc);
+			status = m_tuple4->addItem ("mc_kape" ,  m_kapemc) ;
+
+			status = m_tuple4->addItem ("mc_kampx" , m_kampxmc);
+			status = m_tuple4->addItem ("mc_kampy" , m_kampymc);
+			status = m_tuple4->addItem ("mc_kampz" , m_kampzmc);
+			status = m_tuple4->addItem ("mc_kame" ,  m_kamemc) ;
 
 			status = m_tuple4->addItem ("ntof1", m_ntof1,0,5);
 			status = m_tuple4->addIndexedItem("toflayer1", m_ntof1, m_toflayer1);
@@ -299,6 +310,7 @@ StatusCode TwoProng::execute() {
 		bool psipDecay = false;
 		//int rootIndex = -1;
 		int isrtag=0;
+		int KKtag = 0;
 
 		Event::McParticleCol::iterator iter_mc = mcParticleCol->begin();
 		for (; iter_mc != mcParticleCol->end(); iter_mc++)
@@ -332,6 +344,23 @@ StatusCode TwoProng::execute() {
 		////////m_motheridx[m_numParticle] = (long)mcidx;
 		////////m_pdgid[m_numParticle] = (long)pdgid;
 		////////m_numParticle += 1; 
+
+			if ((*iter_mc)->particleProperty() == 321){
+				KKtag = KKtag | 0x1;
+				m_kappxmc = mctrue_track.px();
+				m_kappymc = mctrue_track.py();
+				m_kappzmc = mctrue_track.pz();
+				m_kapemc  = mctrue_track.e();
+			}
+			if ((*iter_mc)->particleProperty() == -321){
+				KKtag = KKtag | 0x2;
+				m_kampxmc = mctrue_track.px();
+				m_kampymc = mctrue_track.py();
+				m_kampzmc = mctrue_track.pz();
+				m_kamemc  = mctrue_track.e();
+			}
+
+
 	////////	if(m_mcmatch){
 	////////		if( (*iter_mc)->particleProperty() == 321){
 	////////			mcppip.push_back(mctrue_track);
@@ -390,7 +419,7 @@ StatusCode TwoProng::execute() {
 		m_ISRtag = isrtag;
 		if (isrtag==0) counter[3] ++;
 		else counter[4] ++;
-
+		m_KKtag = KKtag;
 
 
 	////////if(m_mcmatch&&mcIGam.size()==2&&mcIEta.size()==1){
@@ -672,7 +701,6 @@ StatusCode TwoProng::execute() {
 			m_pid2[3] = pid->probKaon();
 			m_pid2[4] = pid->probProton();
 		}
-
 
 	}
 

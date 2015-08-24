@@ -87,6 +87,17 @@ private:
   NTuple::Array<int>  m_pdgid;
   NTuple::Array<int>  m_motheridx;
   NTuple::Item<int>   m_ISRtag;
+  NTuple::Item<int>   m_KKtag;
+  
+  NTuple::Item<double> m_kappxmc;
+  NTuple::Item<double> m_kappymc; 
+  NTuple::Item<double> m_kappzmc;
+  NTuple::Item<double> m_kapemc;
+
+  NTuple::Item<double> m_kampxmc;
+  NTuple::Item<double> m_kampymc; 
+  NTuple::Item<double> m_kampzmc;
+  NTuple::Item<double> m_kamemc;
 
   NTuple::Item<long>    m_ntof1;
   NTuple::Array<int>   m_toflayer1;
